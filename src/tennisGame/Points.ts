@@ -1,6 +1,11 @@
 export class Points {
-    constructor(private points: number) {
+    private readonly _points: number;
+    constructor(points: number) {
+        this._points = points;
+    }
 
+    get points(): number {
+        return this._points;
     }
 
     winPoint(): Points {

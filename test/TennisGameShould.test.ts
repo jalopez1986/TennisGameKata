@@ -1,38 +1,53 @@
-import {Player} from "../src/tennisGame/Player";
+import { Player } from "../src/tennisGame/Player";
 
 
 describe("Tennis Game Should", () => {
+    let playerA: Player;
 
     test("when a player have 0 points won, the score must be love", () => {
-        const playerA = new Player('A');
+        givenAPlayer('A');
 
-        expect(playerA.score()).toBe('love');
+        whenThePlayerWontThisPoints(0);
+
+        thenTheScoreIs('love');
     });
 
     test("when a player have 1 points won, the score must be fifteen", () => {
-        const playerA = new Player('A');
+        givenAPlayer('A');
 
-        playerA.winPoint();
+        whenThePlayerWontThisPoints(1);
 
-        expect(playerA.score()).toBe('fifteen');
+        thenTheScoreIs('fifteen');
+
     });
 
     test("when a player have 2 points won, the score must be fifteen", () => {
-        const playerA = new Player('A');
+        givenAPlayer('A');
 
-        playerA.winPoint();
-        playerA.winPoint();
+        whenThePlayerWontThisPoints(2);
 
-        expect(playerA.score()).toBe('thirty');
+        thenTheScoreIs('thirty');
     });
 
     test("when a player have 3 points won, the score must be forty", () => {
-        const playerA = new Player('A');
+        givenAPlayer('A');
 
-        playerA.winPoint();
-        playerA.winPoint();
-        playerA.winPoint();
+        whenThePlayerWontThisPoints(3);
 
-        expect(playerA.score()).toBe('forty');
+        thenTheScoreIs('forty');
     });
+
+    function givenAPlayer(name: string): void {
+        playerA = new Player(name);
+    }
+
+    function whenThePlayerWontThisPoints(points: number) {
+        for(let i = 0; i < points; i++) {
+            playerA.winPoint();
+        }
+    }
+
+    function thenTheScoreIs(score: string) {
+        expect(playerA.score()).toBe(score);
+    }
 });

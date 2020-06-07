@@ -1,18 +1,16 @@
+import {Points} from "./Points";
+
 export class Player {
-    private points: number;
+    private points: Points;
     constructor(private name: string) {
-        this.points = 0;
+        this.points = new Points(0);
     }
 
     score(): string {
-        if (this.points === 0) { return 'love'; }
-        if (this.points === 1) { return 'fifteen'; }
-        if (this.points === 2) { return 'thirty'; }
-        if (this.points === 3) { return 'forty'; }
-
+        return this.points.score();
     }
 
     winPoint() {
-        this.points = this.points + 1;
+        this.points = this.points.winPoint();
     }
 }

@@ -9,6 +9,8 @@ export class Game {
         if (this.haveBothPlayersThreeOrMorePoints() ) {
             if (this.isAdvantageScore()) {
                 return `advantage ${this.leadPlayerName()}`;
+            } if (this.isDeuceScore()) {
+                return 'deuce';
             }
         }
 
@@ -17,6 +19,10 @@ export class Game {
 
     private isAdvantageScore() {
         return Math.abs(this.firstPlayer.totalPoints() - this.secondPlayer.totalPoints()) === 1;
+    }
+
+    private isDeuceScore() {
+        return this.firstPlayer.totalPoints() === this.secondPlayer.totalPoints();
     }
 
     private haveBothPlayersThreeOrMorePoints() {

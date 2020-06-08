@@ -80,30 +80,50 @@ describe("Tennis Game Suit", () => {
             expect(game.score()).toBe('love - fifteen');
         });
 
+        describe('advantage point', () => {
+            test('If at least three points have been scored by each side and the firstPlayer has one more point' +
+                'the score of the game is “advantage” for the firstPlayer', () => {
+                const playerA = givenAPlayer('A');
+                const playerB = givenAPlayer('B');
+                const game = new Game(playerA, playerB);
 
-        test('If at least three points have been scored by each side and the firstPlayer has one more point' +
-            'the score of the game is “advantage” for the firstPlayer', () => {
-            const playerA = givenAPlayer('A');
-            const playerB = givenAPlayer('B');
-            const game = new Game(playerA, playerB);
+                whenThePlayerWontThisPoints(playerA, 4);
+                whenThePlayerWontThisPoints(playerB, 3);
 
-            whenThePlayerWontThisPoints(playerA, 4);
-            whenThePlayerWontThisPoints(playerB, 3);
+                expect(game.score()).toBe('advantage ' + playerA.name);
+            });
 
-            expect(game.score()).toBe('advantage ' + playerA.name);
+            test('If at least three points have been scored by each side and the secondPlayer has one more point' +
+                'the score of the game is “advantage” for the firstPlayer', () => {
+                const playerA = givenAPlayer('A');
+                const playerB = givenAPlayer('B');
+                const game = new Game(playerA, playerB);
+
+                whenThePlayerWontThisPoints(playerA, 3);
+                whenThePlayerWontThisPoints(playerB, 4);
+
+                expect(game.score()).toBe('advantage ' + playerB.name);
+            });
         });
 
-        test('If at least three points have been scored by each side and the secondPlayer has one more point' +
-            'the score of the game is “advantage” for the firstPlayer', () => {
-            const playerA = givenAPlayer('A');
-            const playerB = givenAPlayer('B');
-            const game = new Game(playerA, playerB);
+        describe('deuce point', () => {
+            test('If at least three points have been scored by each player, and the scores are equal, the score is deuce', () => {
+                const playerA = givenAPlayer('A');
+                const playerB = givenAPlayer('B');
+                const game = new Game(playerA, playerB);
 
-            whenThePlayerWontThisPoints(playerA, 3);
-            whenThePlayerWontThisPoints(playerB, 4);
+                whenThePlayerWontThisPoints(playerA, 4);
+                whenThePlayerWontThisPoints(playerB, 4);
 
-            expect(game.score()).toBe('advantage ' + playerB.name);
+                expect(game.score()).toBe('deuce');
+            });
+
+
         });
+
+
+
+
     });
 
 

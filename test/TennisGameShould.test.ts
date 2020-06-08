@@ -35,6 +35,8 @@ describe("Tennis Game Suit", () => {
 
             thenTheScoreIs(player,'forty');
         });
+
+
     });
 
     describe('Game Should', () => {
@@ -117,7 +119,41 @@ describe("Tennis Game Suit", () => {
 
                 expect(game.score()).toBe('deuce');
             });
+        });
 
+        describe('game point', () => {
+            test('given a game with the firstPlayer with 4 point and the second with 1 point, the firstPlayer won the game', () => {
+                const playerA = givenAPlayer('A');
+                const playerB = givenAPlayer('B');
+                const game = new Game(playerA, playerB);
+
+                whenThePlayerWontThisPoints(playerA, 4);
+                whenThePlayerWontThisPoints(playerB, 1);
+
+                expect(game.score()).toBe(`${playerA.name} won`);
+            });
+
+            test('given a game with the firstPlayer with 5 point and the second with 3 point, the firstPlayer won the game', () => {
+                const playerA = givenAPlayer('A');
+                const playerB = givenAPlayer('B');
+                const game = new Game(playerA, playerB);
+
+                whenThePlayerWontThisPoints(playerA, 5);
+                whenThePlayerWontThisPoints(playerB, 3);
+
+                expect(game.score()).toBe(`${playerA.name} won`);
+            });
+
+            test('given a game with the firstPlayer with 4 point and the second with 6 point, the secondPlayer won the game', () => {
+                const playerA = givenAPlayer('A');
+                const playerB = givenAPlayer('B');
+                const game = new Game(playerA, playerB);
+
+                whenThePlayerWontThisPoints(playerA, 4);
+                whenThePlayerWontThisPoints(playerB, 6);
+
+                expect(game.score()).toBe(`${playerB.name} won`);
+            });
 
         });
 

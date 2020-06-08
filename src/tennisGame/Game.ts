@@ -6,16 +6,31 @@ export class Game {
     }
 
     score() {
+        if (this.hasOnePlayerWonAtLeastFourPoints() && this.hasOnePlayerAtLeasTwoPointsMoreThanTheOtherPlayer()) {
+            return `${this.leadPlayerName()} won`;
+        }
+
         if (this.haveBothPlayersThreeOrMorePoints() ) {
-            if (this.isAdvantageScore()) {
-                return `advantage ${this.leadPlayerName()}`;
-            } if (this.isDeuceScore()) {
-                return 'deuce';
-            }
+            if (this.isAdvantageScore()) { return `advantage ${this.leadPlayerName()}`; }
+
+            if (this.isDeuceScore()) { return 'deuce'; }
         }
 
         return `${this.firstPlayer.score()} - ${this.secondPlayer.score()}`;
     }
+
+    private hasOnePlayerWonAtLeastFourPoints() {
+        return this.firstPlayer.totalPoints() >= 4 || this.secondPlayer.totalPoints() >= 4;
+    }
+
+    private hasOnePlayerAtLeasTwoPointsMoreThanTheOtherPlayer() {
+        return Math.abs(this.firstPlayer.totalPoints() - this.secondPlayer.totalPoints()) >= 2;
+    }
+
+    private haveBothPlayersThreeOrMorePoints() {
+        return this.firstPlayer.totalPoints() >= 3 && this.secondPlayer.totalPoints() >= 3;
+    }
+
 
     private isAdvantageScore() {
         return Math.abs(this.firstPlayer.totalPoints() - this.secondPlayer.totalPoints()) === 1;
@@ -25,9 +40,7 @@ export class Game {
         return this.firstPlayer.totalPoints() === this.secondPlayer.totalPoints();
     }
 
-    private haveBothPlayersThreeOrMorePoints() {
-        return this.firstPlayer.totalPoints() >= 3 && this.secondPlayer.totalPoints() >= 3;
-    }
+
 
 
     private leadPlayerName(): string {

@@ -35,8 +35,6 @@ describe("Tennis Game Suit", () => {
 
             thenTheScoreIs(player,'forty');
         });
-
-
     });
 
     describe('Game Should', () => {
@@ -154,15 +152,8 @@ describe("Tennis Game Suit", () => {
 
                 expect(game.score()).toBe(`${playerB.name} won`);
             });
-
         });
-
-
-
-
     });
-
-
 
     function givenAPlayer(name: string): Player {
         return new Player(name);
@@ -172,18 +163,13 @@ describe("Tennis Game Suit", () => {
         return new Game(firstPlayer, secondPlayer);
     }
 
-    function whenThePlayerWontThisPoints(player: Player, points: number) {
+    function whenThePlayerWontThisPoints(player: Player, points: number): void {
         for(let i = 0; i < points; i++) {
             player.winPoint();
         }
     }
 
-    function thenTheScoreIs(player: Player, score: string) {
+    function thenTheScoreIs(player: Player, score: string): void {
         expect(player.score()).toBe(score);
     }
-
-
-
-
-
 });
